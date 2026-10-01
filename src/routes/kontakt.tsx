@@ -36,7 +36,7 @@ const CONTACT_EMAIL = "prezent3d@gmail.com";
 
 const subjects = ["Pytanie o zamówienie", "Wycena projektu", "Poprawki do projektu", "Współpraca", "Inne"];
 
-const inputClass = "w-full rounded-md border border-input bg-background px-3.5 py-2.5 text-[12px] text-foreground placeholder:text-muted-foreground/70 outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20";
+const inputClass = "w-full rounded-md border border-input bg-background px-3.5 py-2.5 text-[13px] text-foreground placeholder:text-muted-foreground/70 outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20";
 
 const contactDetails = [
   { icon: Mail, label: "Email", value: CONTACT_EMAIL, note: "Napisz do nas o dowolnej porze.", href: `mailto:${CONTACT_EMAIL}` },
@@ -73,8 +73,8 @@ function KontaktPage() {
         <div className="section-shell relative z-10 flex min-h-[270px] items-center py-10 sm:min-h-[310px]">
           <div className="max-w-[510px]">
             <p className="text-[11px] font-extrabold uppercase text-primary">Kontakt</p>
-            <h1 className="mt-2 text-[34px] font-extrabold leading-[1.08] text-foreground sm:text-[42px]">Skontaktuj się z nami</h1>
-            <p className="mt-4 max-w-[470px] text-[13px] leading-6 text-muted-foreground">Masz pytanie dotyczące figurki, zamówienia lub realizacji Twojego pomysłu? Napisz lub zadzwoń — chętnie pomożemy.</p>
+            <h1 className="mt-3 text-[36px] font-extrabold leading-[1.08] text-foreground sm:text-[44px] lg:text-[52px]">Skontaktuj się z nami</h1>
+            <p className="mt-5 max-w-[560px] text-[15px] leading-7 text-muted-foreground">Masz pytanie dotyczące figurki, zamówienia lub realizacji Twojego pomysłu? Napisz lub zadzwoń — chętnie pomożemy.</p>
           </div>
         </div>
       </section>
@@ -82,18 +82,18 @@ function KontaktPage() {
       <section className="bg-background py-7 md:py-10">
         <div className="section-shell grid gap-3 lg:grid-cols-[0.92fr_1.58fr_0.95fr]">
           <section className="rounded-lg border border-border bg-card px-6 py-6 sm:px-7" aria-labelledby="contact-details-title">
-            <p className="text-[10px] font-extrabold uppercase text-primary">Skontaktuj się z nami</p>
-            <h2 id="contact-details-title" className="mt-2 text-[18px] font-extrabold text-foreground">Dane kontaktowe</h2>
-            <p className="mt-3 text-[10px] leading-5 text-muted-foreground">Jesteśmy dostępni od poniedziałku do piątku w godzinach 9:00–17:00. Odpowiadamy na wszystkie wiadomości w ciągu 24 godzin.</p>
+            <p className="text-[11px] font-extrabold uppercase text-primary">Skontaktuj się z nami</p>
+            <h2 id="contact-details-title" className="mt-1 text-2xl font-extrabold leading-tight text-foreground md:text-[28px]">Dane kontaktowe</h2>
+            <p className="mt-3 text-xs leading-5 text-muted-foreground">Jesteśmy dostępni od poniedziałku do piątku w godzinach 9:00–17:00. Odpowiadamy na wszystkie wiadomości w ciągu 24 godzin.</p>
             <div className="mt-7 space-y-6">
               {contactDetails.map((item) => {
                 const content = (
                   <>
                     <span className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-primary"><item.icon className="size-5" /></span>
                     <span>
-                      <span className="block text-[10px] font-bold text-foreground">{item.label}</span>
-                      <span className="mt-1 block text-[11px] font-semibold text-foreground">{item.value}</span>
-                      <span className="mt-1 block text-[9px] leading-4 text-muted-foreground">{item.note}</span>
+                      <span className="block text-[11px] font-bold text-foreground">{item.label}</span>
+                      <span className="mt-1 block text-xs font-semibold text-foreground">{item.value}</span>
+                      <span className="mt-1 block text-[10px] leading-4 text-muted-foreground">{item.note}</span>
                     </span>
                   </>
                 );
@@ -103,9 +103,9 @@ function KontaktPage() {
           </section>
 
           <section className="rounded-lg border border-border bg-card px-6 py-6 sm:px-7" aria-labelledby="contact-form-title">
-            <p className="text-[10px] font-extrabold uppercase text-primary">Napisz do nas</p>
-            <h2 id="contact-form-title" className="mt-2 text-[18px] font-extrabold text-foreground">Formularz kontaktowy</h2>
-            <p className="mt-3 text-[10px] leading-5 text-muted-foreground">Wypełnij krótki formularz, a my jak najszybciej odpowiemy na Twoje pytanie.</p>
+            <p className="text-[11px] font-extrabold uppercase text-primary">Napisz do nas</p>
+            <h2 id="contact-form-title" className="mt-1 text-2xl font-extrabold leading-tight text-foreground md:text-[28px]">Formularz kontaktowy</h2>
+            <p className="mt-3 text-xs leading-5 text-muted-foreground">Wypełnij krótki formularz, a my jak najszybciej odpowiemy na Twoje pytanie.</p>
             <form className="mt-5 grid gap-3" onSubmit={handleSubmit}>
               <div className="grid gap-3 sm:grid-cols-2">
                 <input required value={name} onChange={(event) => setName(event.target.value)} className={inputClass} placeholder="Imię i nazwisko *" aria-label="Imię i nazwisko" />
@@ -117,24 +117,24 @@ function KontaktPage() {
               <textarea required rows={5} value={message} onChange={(event) => setMessage(event.target.value)} className={`${inputClass} resize-none`} placeholder="Wiadomość *" aria-label="Wiadomość" />
               <Button variant="hero" type="submit" className="w-full"><Mail /> Wyślij wiadomość <ArrowRight /></Button>
             </form>
-            <p className="mt-4 flex items-center gap-2 text-[9px] text-muted-foreground"><Lock className="size-3.5 shrink-0 text-primary" /> Twoje dane są bezpieczne. Nie udostępniamy ich osobom trzecim.</p>
+            <p className="mt-4 flex items-center gap-2 text-[10px] text-muted-foreground"><Lock className="size-3.5 shrink-0 text-primary" /> Twoje dane są bezpieczne. Nie udostępniamy ich osobom trzecim.</p>
           </section>
 
           <aside className="rounded-lg border border-border bg-secondary/45 px-6 py-6 sm:px-7" aria-labelledby="quick-help-title">
             <div className="flex items-start gap-3">
               <span className="grid size-10 shrink-0 place-items-center rounded-full bg-card text-primary"><CircleHelp className="size-6" /></span>
               <div>
-                <p className="text-[10px] font-extrabold uppercase text-primary">Szybka pomoc</p>
-                <h2 id="quick-help-title" className="mt-1 text-[13px] font-extrabold text-foreground">Najczęściej zadawane pytania</h2>
+                <p className="text-[11px] font-extrabold uppercase text-primary">Szybka pomoc</p>
+                <h2 id="quick-help-title" className="mt-1 text-base font-extrabold text-foreground">Najczęściej zadawane pytania</h2>
               </div>
             </div>
-            <p className="mt-4 text-[10px] leading-5 text-muted-foreground">Zanim napiszesz do nas wiadomość, sprawdź czy odpowiedź na Twoje pytanie nie znajduje się w FAQ.</p>
+            <p className="mt-4 text-xs leading-5 text-muted-foreground">Zanim napiszesz do nas wiadomość, sprawdź czy odpowiedź na Twoje pytanie nie znajduje się w FAQ.</p>
             <Button variant="outline" size="sm" asChild className="mt-4 border-primary text-primary hover:bg-primary hover:text-primary-foreground"><Link to="/faq">Przejdź do FAQ <ArrowRight /></Link></Button>
             <div className="mt-5 border-t border-border">
               {quickFaq.map((item) => (
                 <Link key={item.title} to="/faq" className="group flex items-center gap-3 border-b border-border py-3 last:border-b-0">
                   <span className="grid size-8 shrink-0 place-items-center rounded-full bg-card text-primary"><item.icon className="size-4" /></span>
-                  <span className="min-w-0 flex-1"><span className="block text-[10px] font-bold text-foreground">{item.title}</span><span className="mt-0.5 block text-[9px] text-muted-foreground">{item.text}</span></span>
+                  <span className="min-w-0 flex-1"><span className="block text-[11px] font-bold text-foreground">{item.title}</span><span className="mt-0.5 block text-[10px] text-muted-foreground">{item.text}</span></span>
                   <ArrowRight className="size-3.5 shrink-0 text-primary transition-transform group-hover:translate-x-0.5" />
                 </Link>
               ))}

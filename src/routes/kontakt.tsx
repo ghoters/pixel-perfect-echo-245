@@ -36,7 +36,7 @@ const CONTACT_EMAIL = "prezent3d@gmail.com";
 
 const subjects = ["Pytanie o zamówienie", "Wycena projektu", "Poprawki do projektu", "Współpraca", "Inne"];
 
-const inputClass = "w-full rounded-md border border-input bg-background px-3.5 py-2.5 text-[12px] text-foreground placeholder:text-muted-foreground/70 outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20";
+const inputClass = "w-full rounded-md border border-input bg-background px-3.5 py-2.5 text-[13px] text-foreground placeholder:text-muted-foreground/70 outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20";
 
 const contactDetails = [
   { icon: Mail, label: "Email", value: CONTACT_EMAIL, note: "Napisz do nas o dowolnej porze.", href: `mailto:${CONTACT_EMAIL}` },

@@ -64,9 +64,10 @@ function KontaktPage() {
   };
 
   return (
-    <main className="min-h-screen overflow-x-clip bg-background">
+    <main className="flex min-h-screen flex-col overflow-x-clip bg-background">
       <SiteHeader active="kontakt" />
 
+      <div className="flex-1">
       <section className="relative min-h-[270px] overflow-hidden bg-brand-soft sm:min-h-[310px]">
         <img src={kontaktBannerAsset.url} alt="Personalizowana figurka 3D pary" width={1920} height={700} className="absolute inset-0 size-full object-cover object-[74%_center] sm:object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/55 to-transparent sm:via-background/20" aria-hidden="true" />
@@ -142,6 +143,7 @@ function KontaktPage() {
           </aside>
         </div>
       </section>
+      </div>
 
       <SiteFooter />
     </main>

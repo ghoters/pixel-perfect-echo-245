@@ -5,7 +5,7 @@ import logoAsset from "@/assets/logo.png.asset.json";
 
 const navLinkHover = "transition-colors duration-200 hover:text-primary/70 focus-visible:text-primary/70 focus-visible:outline-none";
 
-export function SiteHeader({ active = "", variant = "full" }: { active?: "home" | "offer" | "faq" | "kontakt" | ""; variant?: "full" | "checkout" }) {
+export function SiteHeader({ active = "", variant = "full" }: { active?: "home" | "offer" | "faq" | "kontakt" | "sklep" | ""; variant?: "full" | "checkout" }) {
   if (variant === "checkout") {
     return (
       <header className="sticky top-0 z-50 border-b border-border/60 bg-card">
@@ -31,7 +31,7 @@ export function SiteHeader({ active = "", variant = "full" }: { active?: "home" 
         <nav className="hidden items-center justify-center gap-6 text-[12px] font-semibold text-foreground lg:flex" aria-label="Główna nawigacja">
           <Link to="/" className={active === "home" ? "border-b-2 border-primary py-6 text-primary" : navLinkHover}>Strona główna</Link>
           <Link to="/oferta" className={active === "offer" ? "border-b-2 border-primary py-6 text-primary" : navLinkHover}>Stwórz swoją figurkę⌄</Link>
-          <Link to="/" hash="realizacje" className={navLinkHover}>Sklep</Link>
+          <Link to="/sklep" className={active === "sklep" ? "border-b-2 border-primary py-6 text-primary" : navLinkHover}>Sklep</Link>
           <Link to="/kontakt" className={active === "kontakt" ? "border-b-2 border-primary py-6 text-primary" : navLinkHover}>Kontakt</Link>
           <Link to="/faq" className={active === "faq" ? "border-b-2 border-primary py-6 text-primary" : navLinkHover}>FAQ</Link>
         </nav>

@@ -34,7 +34,7 @@ function SklepPage() {
             Nasz sklep pojawi się już wkrótce
           </h1>
           <p className="mt-5 max-w-[540px] text-[15px] leading-7 text-muted-foreground">
-            Wkrótce będziesz mógl znaleźć tutaj nasze gotowe modele i produkty do druku 3D.
+            Wkrótce będziesz mógl znaleźć tutaj nasze gotowe modele.
           </p>
           <p className="mt-4 max-w-[540px] text-[15px] leading-7 text-muted-foreground">
             Już teraz możesz jednak zamówić swoją własną, personalizowaną figurkę 3D stworzoną na podstawie zdjęcia.

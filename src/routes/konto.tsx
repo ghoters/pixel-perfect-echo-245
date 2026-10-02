@@ -45,8 +45,11 @@ function Toggle({ on, onClick, label }: { on: boolean; onClick: () => void; labe
 }
 
 function AccountPage() {
-  const initialView = Route.useSearch().view;
-  const [view, setView] = useState<View>(initialView ?? "dashboard");
+  const currentView = Route.useSearch().view;
+  const [view, setView] = useState<View>(currentView ?? "dashboard");
+  useEffect(() => {
+    if (currentView) setView(currentView);
+  }, [currentView]);
   const [query, setQuery] = useState("");
   const [noticeOpen, setNoticeOpen] = useState(false);
   const [orders, setOrders] = useState<{ id: string; order_number: string; figurine_price: number; delivery_price: number; delivery_label: string; status: string; created_at: string }[]>([]);

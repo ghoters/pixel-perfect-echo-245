@@ -24,8 +24,9 @@ export const Route = createFileRoute("/konto")({
     { name: "twitter:card", content: "summary_large_image" },
   ] }),
   validateSearch: (search: Record<string, unknown>): { view?: View } => {
-    const view = search.view;
-    return { view: view === "orders" || view === "profile" || view === "addresses" || view === "payments" || view === "dashboard" ? view : undefined };
+    const view = search["view"];
+    if (view === "orders" || view === "profile" || view === "addresses" || view === "payments" || view === "dashboard") return { view };
+    return {};
   },
   component: AccountPage,
 });

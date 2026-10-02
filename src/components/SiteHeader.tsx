@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Mail, Menu, Search, ShieldCheck, ShoppingCart, UserRound } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Mail, Menu, Search, ShieldCheck, ShoppingCart, UserRound } from "lucide-react";
 import logoAsset from "@/assets/logo.png.asset.json";
 
 const navLinkHover = "transition-colors duration-200 hover:text-primary/70 focus-visible:text-primary/70 focus-visible:outline-none";
@@ -39,9 +38,6 @@ export function SiteHeader({ active = "", variant = "full" }: { active?: "home" 
           <Search className="size-4" aria-hidden="true" />
           <Link to="/logowanie" aria-label="Zaloguj się" className={navLinkHover}><UserRound className="size-4" aria-hidden="true" /></Link>
           <ShoppingCart className="size-4" aria-hidden="true" />
-          {active !== "offer" && (
-            <Button variant="hero" size="default" asChild><Link to="/oferta">Stwórz swoją figurkę <ArrowRight /></Link></Button>
-          )}
         </div>
         <Menu className="size-6 lg:hidden" aria-label="Otwórz menu" />
       </div>

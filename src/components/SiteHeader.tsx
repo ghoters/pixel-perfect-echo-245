@@ -37,7 +37,7 @@ export function SiteHeader({ active = "", variant = "full" }: { active?: "home" 
         </nav>
         <div className="hidden items-center gap-4 lg:flex">
           <Search className="size-4" aria-hidden="true" />
-          <UserRound className="size-4" aria-hidden="true" />
+          <Link to="/logowanie" aria-label="Zaloguj się" className={navLinkHover}><UserRound className="size-4" aria-hidden="true" /></Link>
           <ShoppingCart className="size-4" aria-hidden="true" />
           <Button variant="hero" size="default" asChild><Link to="/oferta">Stwórz swoją figurkę <ArrowRight /></Link></Button>
         </div>

@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Mail, Menu, Search, ShieldCheck, ShoppingCart, UserRound } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Mail, Menu, Search, ShieldCheck, ShoppingCart, UserRound } from "lucide-react";
 import logoAsset from "@/assets/logo.png.asset.json";
 
 const navLinkHover = "transition-colors duration-200 hover:text-primary/70 focus-visible:text-primary/70 focus-visible:outline-none";

@@ -22,7 +22,7 @@ export const Route = createFileRoute("/admin")({
   component: AdminPage,
 });
 
-const STATUSES = ["W realizacji", "Gotowe do pobrania", "Wysłane", "Zakończone", "Anulowane"];
+const STATUSES: [string, ...string[]] = ["W realizacji", "Gotowe do pobrania", "Wysłane", "Zakończone", "Anulowane"];
 type Order = { id: string; user_id: string; order_number: string; figurine_price: number; delivery_price: number; delivery_label: string; status: string; created_at: string };
 type Profile = { id: string; display_name: string; email: string; created_at: string };
 const input = "h-9 rounded-md border border-border bg-background px-2 text-[13px] outline-none focus:border-primary";

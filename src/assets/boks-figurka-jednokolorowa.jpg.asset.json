@@ -1,11 +1,11 @@
 {
-  "asset_id": "446acca9-18a1-45ed-a021-6d2d0f6310e7",
-  "content_type": "image/jpeg",
-  "created_at": "2026-10-01T23:36:23Z",
+  "version": 1,
+  "asset_id": "c0fbe808-7d81-4319-83c0-33116bb1588b",
+  "project_id": "1402e2bf-8698-43da-b3d2-4f7676236ca2",
+  "url": "/__l5e/assets-v1/c0fbe808-7d81-4319-83c0-33116bb1588b/boks-figurka-jednokolorowa.jpg",
+  "r2_key": "a/v1/1402e2bf-8698-43da-b3d2-4f7676236ca2/c0fbe808-7d81-4319-83c0-33116bb1588b/boks-figurka-jednokolorowa.jpg",
   "original_filename": "boks-figurka-jednokolorowa.jpg",
-  "project_id": "5c4b48b9-22cf-454e-bb31-d8dfd81129e9",
-  "r2_key": "a/v1/5c4b48b9-22cf-454e-bb31-d8dfd81129e9/446acca9-18a1-45ed-a021-6d2d0f6310e7/boks-figurka-jednokolorowa.jpg",
   "size": 59649,
-  "url": "/__l5e/assets-v1/446acca9-18a1-45ed-a021-6d2d0f6310e7/boks-figurka-jednokolorowa.jpg",
-  "version": 1
+  "content_type": "image/jpeg",
+  "created_at": "2026-10-02T05:08:52Z"
 }

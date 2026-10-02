@@ -53,7 +53,7 @@ function LoginPage() {
           <Link to="/" aria-label="prezent3d.com — strona główna"><img src={logoAsset.url} alt="prezent3d.com" className="h-11 w-auto" /></Link>
 
           <img src={figurka} alt="Figurka 3D pary z psem" width={832} height={1216}
-            className="pointer-events-none absolute bottom-[110px] right-0 hidden w-[46%] max-w-[340px] mix-blend-multiply drop-shadow-2xl md:block" />
+            className="pointer-events-none absolute bottom-[120px] -right-4 hidden w-[50%] max-w-[380px] mix-blend-multiply drop-shadow-2xl md:block" />
 
           <div className="relative mt-16 max-w-[340px] md:max-w-[52%]">
             <h1 className="text-[30px] font-bold leading-[1.25] text-foreground lg:text-[32px]">

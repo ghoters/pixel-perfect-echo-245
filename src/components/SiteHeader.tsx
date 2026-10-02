@@ -30,7 +30,7 @@ function AccountMenu({ icon }: { icon: React.ReactNode }) {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" sideOffset={10} className="w-52 rounded-lg border-border bg-card p-1.5 shadow-lg">
-        <DropdownMenuItem asChild className={menuItemClass}><Link to="/konto"><UserRound className="size-4 text-primary" /> Moje konto</Link></DropdownMenuItem>
+        <DropdownMenuItem asChild className={menuItemClass}><Link to="/konto"><UserRound className="size-4 text-primary" /> Pulpit</Link></DropdownMenuItem>
         <DropdownMenuItem asChild className={menuItemClass}><Link to="/konto" search={{ view: "orders" }}><ShoppingCart className="size-4 text-primary" /> Moje zamówienia</Link></DropdownMenuItem>
         <DropdownMenuItem asChild className={menuItemClass}><Link to="/konto" search={{ view: "profile" }}><UserRound className="size-4 text-primary" /> Dane konta</Link></DropdownMenuItem>
         <DropdownMenuSeparator className="bg-border" />

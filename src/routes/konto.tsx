@@ -33,7 +33,7 @@ export const Route = createFileRoute("/konto")({
 
 type View = "dashboard" | "orders" | "profile" | "addresses" | "payments";
 const navigation = [
-  { id: "dashboard", label: "Dashboard", icon: Box },
+  { id: "dashboard", label: "Pulpit", icon: Box },
   { id: "orders", label: "Moje zamówienia", icon: Package },
   { id: "profile", label: "Dane konta", icon: UserRound },
   { id: "addresses", label: "Adresy", icon: MapPin },

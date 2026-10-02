@@ -74,7 +74,7 @@ function CustomerOrderPage() {
       const { data: userData } = await supabase.auth.getUser();
       if (userData.user) await supabase.from("order_files").insert({ order_id: order.id, uploaded_by: userData.user.id, storage_path: attachmentPath, file_name: attachment.name, file_size: attachment.size, mime_type: attachment.type || "application/octet-stream", category: "revision_reference" });
     }
-    const { data, error } = await supabase.rpc("request_order_revision", { _visualization_id: currentVisualization.id, _message: message.trim(), _attachment_path: attachmentPath });
+    const { data, error } = await supabase.rpc("request_order_revision", { _visualization_id: currentVisualization.id, _message: message.trim(), _attachment_path: attachmentPath ?? "" });
     setFeedback(error?.message ?? (data === "awaiting_payment" ? "Prośba o dodatkową rundę za 50 zł została wysłana do administratora." : "Uwagi zostały wysłane."));
     if (!error) { setMessage(""); setAttachment(null); setShowRevision(false); await load(); }
   };

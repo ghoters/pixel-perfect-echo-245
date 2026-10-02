@@ -100,7 +100,32 @@ function AccountPage() {
             </div>
 
             <Link to="/oferta" className="relative flex min-h-[82px] items-center gap-3 overflow-hidden rounded-md border border-border bg-gradient-to-r from-secondary/60 via-card to-secondary/60 p-4 shadow-sm hover:border-primary/40"><img src={couple} alt="" loading="lazy" width={768} height={768} className="hidden h-[72px] w-[145px] shrink-0 object-cover object-top sm:block" /><div className="min-w-0 flex-1"><h2 className="text-sm font-extrabold">Zamów swoją wymarzoną figurkę 3D!</h2><p className="mt-1 text-[11px] leading-5">Przekształć swoje zdjęcia w wyjątkową figurkę, która będzie doskonałą pamiątką lub prezentem.</p></div><span className="hidden items-center gap-2 rounded-md bg-primary px-4 py-2 text-[11px] font-semibold text-primary-foreground sm:inline-flex">Zobacz ofertę <ArrowRight className="size-3" /></span></Link>
-          </div> : <section className="min-h-[520px] p-5 sm:p-7"><h1 className="text-2xl font-extrabold">{navigation.find(item => item.id === view)?.label}</h1>{view === "orders" ? filtered.length ? <div className="mt-8 rounded-md border border-border bg-card px-5 py-2">{orderList(filtered)}</div> : <div className="mt-8 flex flex-col items-center rounded-md border border-border bg-card px-5 py-12 text-center"><img src={emptyBox} alt="Otwarte puste pudełko" width={768} height={768} className="h-36 w-40 object-contain" /><h2 className="mt-2 text-base font-bold">Brak zamówień</h2><p className="mt-2 text-sm text-muted-foreground">{query ? `Nie znaleziono zamówień dla „${query}”.` : "Na razie nie masz jeszcze żadnych zamówień."}</p><Button asChild variant="hero" className="mt-5"><Link to="/oferta">Przejdź do oferty <ArrowRight /></Link></Button></div> : <div className="mt-8 rounded-md border border-border bg-card p-7 text-sm text-muted-foreground">{view === "profile" ? "Dane konta będą dostępne po uruchomieniu logowania." : view === "addresses" ? "Nie dodano jeszcze adresów." : "Nie masz jeszcze płatności ani faktur."}</div>}</section>}
+          </div> : view === "orders" ? <section className="min-h-[520px] space-y-4 p-4 sm:p-6">
+            <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr]">
+              <div className="py-1"><h1 className="text-xl font-extrabold sm:text-2xl">Moje zamówienia</h1><p className="mt-1 max-w-md text-[12px] leading-5 text-muted-foreground">Tutaj znajdziesz wszystkie swoje zamówienia – zarówno figurki 3D na zamówienie, jak i gotowe modele 3D ze sklepu.</p></div>
+              <div className="relative flex min-h-[108px] overflow-hidden rounded-md border border-border bg-card p-2"><div className="relative w-full overflow-hidden rounded-md bg-secondary/70 p-4"><div className="relative z-10 max-w-[64%]"><h2 className="text-[13px] font-bold">Stwórz swoją figurkę 3D</h2><p className="mt-1 text-[11px] leading-4">Zamów personalizowaną figurkę ze swoich zdjęć i ciesz się wyjątkową pamiątką!</p><Link to="/oferta" className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-primary underline underline-offset-2">Przejdź do konfiguratora <ArrowRight className="size-3" /></Link></div><img src={couple} alt="Figurka pary z psem" width={768} height={768} className="absolute -bottom-6 right-0 h-[125px] w-[38%] object-contain object-bottom" /></div></div>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap gap-2">{(["Wszystkie", "Figurki na zamówienie", "Modele 3D"] as const).map(t => <Button key={t} type="button" size="sm" variant={typeFilter === t ? "hero" : "outline"} onClick={() => setTypeFilter(t)} className="h-8 rounded-full px-4 text-[11px] font-semibold">{t}</Button>)}</div>
+              <div className="flex flex-wrap gap-2">{(["Wszystkie", "W realizacji", "Wymaga działania", "Zakończone"] as const).map(s => <Button key={s} type="button" size="sm" variant={statusFilter === s ? "hero" : "outline"} onClick={() => setStatusFilter(s)} className="h-8 rounded-full px-4 text-[11px] font-semibold">{s}</Button>)}</div>
+            </div>
+
+            {filtered.length ? <div className="rounded-md border border-border bg-card px-5 py-2">{orderList(filtered)}</div> : <div className="flex flex-col items-center rounded-md border border-border bg-card px-5 py-10 text-center">
+              <img src={emptyBox} alt="Otwarte puste pudełko" width={768} height={768} className="h-36 w-40 object-contain" />
+              <h2 className="mt-3 text-lg font-extrabold">Nie masz jeszcze żadnych zamówień</h2>
+              <p className="mt-2 max-w-md text-[12px] leading-5 text-muted-foreground">{query ? `Nie znaleziono zamówień dla „${query}”.` : "Gdy złożysz zamówienie na personalizowaną figurkę 3D lub kupisz gotowy model 3D, pojawi się ono tutaj. Możesz od razu przejść do konfiguratora i stworzyć coś wyjątkowego!"}</p>
+              <Button asChild variant="hero" className="mt-5 px-6"><Link to="/oferta"><Box className="size-4" /> Stwórz swoją figurkę 3D <ArrowRight /></Link></Button>
+              <div className="mt-8 grid w-full grid-cols-1 gap-4 border-t border-border pt-6 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { icon: Camera, title: "Własne zdjęcia", text: "Wyślij nam zdjęcia, a my zajmiemy się resztą." },
+                  { icon: Box, title: "Precyzyjne modele 3D", text: "Wysoka jakość i dbałość o detale." },
+                  { icon: Paintbrush, title: "Ręczne malowanie", text: "Opcja personalizacji i ręcznego malowania." },
+                  { icon: Truck, title: "Bezpieczna dostawa", text: "Twoja figurka dotrze do Ciebie w idealnym stanie." },
+                ].map(({ icon: Icon, title, text }) => <div key={title} className="flex items-start gap-3 text-left"><span className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-primary"><Icon className="size-5" /></span><span><strong className="block text-[12px] font-bold">{title}</strong><span className="block text-[11px] leading-4 text-muted-foreground">{text}</span></span></div>)}
+              </div>
+            </div>}
+          </section> : <section className="min-h-[520px] p-5 sm:p-7"><h1 className="text-2xl font-extrabold">{navigation.find(item => item.id === view)?.label}</h1><div className="mt-8 rounded-md border border-border bg-card p-7 text-sm text-muted-foreground">{view === "profile" ? "Dane konta będą dostępne po uruchomieniu logowania." : view === "addresses" ? "Nie dodano jeszcze adresów." : "Nie masz jeszcze płatności ani faktur."}</div></section>}
         </div>
       </div>
     </main>

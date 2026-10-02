@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { readPaymentSummary, type PaymentSummary } from "@/lib/payment-summary";
 import { useNavigate } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
 import { ORDER_NUMBER_KEY, ORDER_PLACED_KEY } from "@/routes/potwierdzenie";
 
 export const Route = createFileRoute("/platnosc")({
@@ -64,9 +65,12 @@ function PaymentPage() {
             <span>{label}</span><ChevronRight aria-hidden="true" />
           </label>)}
         </div>
-          <Button type="button" className="payment-submit" onClick={() => {
+          <Button type="button" className="payment-submit" onClick={async () => {
+            const orderNumber = `#${Math.floor(1000 + Math.random() * 9000)}`;
             window.sessionStorage.setItem(ORDER_PLACED_KEY, "1");
-            window.sessionStorage.setItem(ORDER_NUMBER_KEY, `#${Math.floor(1000 + Math.random() * 9000)}`);
+            window.sessionStorage.setItem(ORDER_NUMBER_KEY, orderNumber);
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) await supabase.from("orders").insert({ user_id: user.id, order_number: orderNumber, figurine_price: summary.figurinePrice, delivery_price: summary.deliveryPrice, delivery_label: summary.deliveryLabel });
             navigate({ to: "/potwierdzenie" });
           }}>Zapłać i złóż zamówienie <ArrowRight aria-hidden="true" /></Button>
         </section>

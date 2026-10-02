@@ -48,7 +48,7 @@ function AccountPage() {
   const currentView = Route.useSearch().view;
   const [view, setView] = useState<View>(currentView ?? "dashboard");
   useEffect(() => {
-    if (currentView) setView(currentView);
+    setView(currentView ?? "dashboard");
   }, [currentView]);
   const [query, setQuery] = useState("");
   const [noticeOpen, setNoticeOpen] = useState(false);

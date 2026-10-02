@@ -35,6 +35,10 @@ const navigation = [
   { id: "payments", label: "Płatności i faktury", icon: CreditCard },
 ] as const;
 
+function Toggle({ on, onClick, label }: { on: boolean; onClick: () => void; label: string }) {
+  return <button type="button" role="switch" aria-checked={on} aria-label={label} onClick={onClick} className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? "bg-primary" : "bg-muted"}`}><span className={`absolute top-0.5 size-4 rounded-full bg-card shadow transition-all ${on ? "left-[18px]" : "left-0.5"}`} /></button>;
+}
+
 function AccountPage() {
   const [view, setView] = useState<View>("dashboard");
   const [query, setQuery] = useState("");
@@ -50,6 +54,8 @@ function AccountPage() {
       setOrders(data ?? []);
       const { data: r } = await supabase.from("user_roles").select("role").eq("user_id", user.id).eq("role", "admin");
       setIsAdmin(!!r?.length);
+      const { data: p } = await supabase.from("profiles").select("display_name, email").eq("id", user.id).maybeSingle();
+      setProfile(p);
     });
   }, []);
   const [typeFilter, setTypeFilter] = useState<"Wszystkie" | "Figurki na zamówienie" | "Modele 3D">("Wszystkie");

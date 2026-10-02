@@ -44,19 +44,17 @@ function SklepPage() {
             <Link to="/oferta">Zamów personalizowaną figurkę <ArrowRight /></Link>
           </Button>
 
+          <p className="mt-8 flex items-center justify-center gap-2 border-t border-border/60 pt-6 text-[13px] font-semibold text-foreground">
+            <Lightbulb className="size-4 text-primary" aria-hidden="true" />
+            Masz pomysł na inny model?
+          </p>
           <Link
             to="/kontakt"
-            className="group mt-8 block border-t border-border/60 pt-6 transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none"
+            className="mt-2 block max-w-[420px] text-[12px] leading-5 text-muted-foreground transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none"
           >
-            <p className="flex items-center justify-center gap-2 text-[13px] font-semibold text-inherit">
-              <Lightbulb className="size-4 text-primary" aria-hidden="true" />
-              <span className="underline-offset-4 group-hover:underline">Masz pomysł na inny model?</span>
-            </p>
-            <p className="mt-2 max-w-[420px] text-[12px] leading-5 text-inherit">
-              <span className="underline-offset-4 group-hover:underline">
-                Napisz do nas – chętnie przygotujemy indywidualny projekt.
-              </span>
-            </p>
+            <span className="underline-offset-4 hover:underline">
+              Napisz do nas – chętnie przygotujemy indywidualny projekt.
+            </span>
           </Link>
         </section>
       </div>

@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      orders: {
+        Row: {
+          created_at: string
+          delivery_label: string
+          delivery_price: number
+          figurine_price: number
+          id: string
+          order_number: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          delivery_label?: string
+          delivery_price?: number
+          figurine_price?: number
+          id?: string
+          order_number: string
+          status?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          delivery_label?: string
+          delivery_price?: number
+          figurine_price?: number
+          id?: string
+          order_number?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string

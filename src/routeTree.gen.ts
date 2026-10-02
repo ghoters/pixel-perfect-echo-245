@@ -20,6 +20,8 @@ import { Route as PlatnoscRouteImport } from './routes/platnosc'
 import { Route as PotwierdzenieRouteImport } from './routes/potwierdzenie'
 import { Route as SklepRouteImport } from './routes/sklep'
 import { Route as ZamowienieRouteImport } from './routes/zamowienie'
+import { Route as AdminZamowieniaOrderIdRouteImport } from './routes/admin.zamowienia.$orderId'
+import { Route as KontoZamowieniaOrderIdRouteImport } from './routes/konto.zamowienia.$orderId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,46 +78,62 @@ const ZamowienieRoute = ZamowienieRouteImport.update({
   path: '/zamowienie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminZamowieniaOrderIdRoute = AdminZamowieniaOrderIdRouteImport.update({
+  id: '/zamowienia/$orderId',
+  path: '/zamowienia/$orderId',
+  getParentRoute: () => AdminRoute,
+} as any)
+const KontoZamowieniaOrderIdRoute = KontoZamowieniaOrderIdRouteImport.update({
+  id: '/zamowienia/$orderId',
+  path: '/zamowienia/$orderId',
+  getParentRoute: () => KontoRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/faq': typeof FaqRoute
   '/kontakt': typeof KontaktRoute
-  '/konto': typeof KontoRoute
+  '/konto': typeof KontoRouteWithChildren
   '/logowanie': typeof LogowanieRoute
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
   '/potwierdzenie': typeof PotwierdzenieRoute
   '/sklep': typeof SklepRoute
   '/zamowienie': typeof ZamowienieRoute
+  '/admin/zamowienia/$orderId': typeof AdminZamowieniaOrderIdRoute
+  '/konto/zamowienia/$orderId': typeof KontoZamowieniaOrderIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/faq': typeof FaqRoute
   '/kontakt': typeof KontaktRoute
-  '/konto': typeof KontoRoute
+  '/konto': typeof KontoRouteWithChildren
   '/logowanie': typeof LogowanieRoute
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
   '/potwierdzenie': typeof PotwierdzenieRoute
   '/sklep': typeof SklepRoute
   '/zamowienie': typeof ZamowienieRoute
+  '/admin/zamowienia/$orderId': typeof AdminZamowieniaOrderIdRoute
+  '/konto/zamowienia/$orderId': typeof KontoZamowieniaOrderIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/faq': typeof FaqRoute
   '/kontakt': typeof KontaktRoute
-  '/konto': typeof KontoRoute
+  '/konto': typeof KontoRouteWithChildren
   '/logowanie': typeof LogowanieRoute
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
   '/potwierdzenie': typeof PotwierdzenieRoute
   '/sklep': typeof SklepRoute
   '/zamowienie': typeof ZamowienieRoute
+  '/admin/zamowienia/$orderId': typeof AdminZamowieniaOrderIdRoute
+  '/konto/zamowienia/$orderId': typeof KontoZamowieniaOrderIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +149,8 @@ export interface FileRouteTypes {
     | '/potwierdzenie'
     | '/sklep'
     | '/zamowienie'
+    | '/admin/zamowienia/$orderId'
+    | '/konto/zamowienia/$orderId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +164,8 @@ export interface FileRouteTypes {
     | '/potwierdzenie'
     | '/sklep'
     | '/zamowienie'
+    | '/admin/zamowienia/$orderId'
+    | '/konto/zamowienia/$orderId'
   id:
     | '__root__'
     | '/'
@@ -157,14 +179,16 @@ export interface FileRouteTypes {
     | '/potwierdzenie'
     | '/sklep'
     | '/zamowienie'
+    | '/admin/zamowienia/$orderId'
+    | '/konto/zamowienia/$orderId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   FaqRoute: typeof FaqRoute
   KontaktRoute: typeof KontaktRoute
-  KontoRoute: typeof KontoRoute
+  KontoRoute: typeof KontoRouteWithChildren
   LogowanieRoute: typeof LogowanieRoute
   OfertaRoute: typeof OfertaRoute
   PlatnoscRoute: typeof PlatnoscRoute
@@ -252,15 +276,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZamowienieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/zamowienia/$orderId': {
+      id: '/admin/zamowienia/$orderId'
+      path: '/zamowienia/$orderId'
+      fullPath: '/admin/zamowienia/$orderId'
+      preLoaderRoute: typeof AdminZamowieniaOrderIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/konto/zamowienia/$orderId': {
+      id: '/konto/zamowienia/$orderId'
+      path: '/zamowienia/$orderId'
+      fullPath: '/konto/zamowienia/$orderId'
+      preLoaderRoute: typeof KontoZamowieniaOrderIdRouteImport
+      parentRoute: typeof KontoRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminZamowieniaOrderIdRoute: typeof AdminZamowieniaOrderIdRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminZamowieniaOrderIdRoute: AdminZamowieniaOrderIdRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface KontoRouteChildren {
+  KontoZamowieniaOrderIdRoute: typeof KontoZamowieniaOrderIdRoute
+}
+
+const KontoRouteChildren: KontoRouteChildren = {
+  KontoZamowieniaOrderIdRoute: KontoZamowieniaOrderIdRoute,
+}
+
+const KontoRouteWithChildren = KontoRoute._addFileChildren(KontoRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   FaqRoute: FaqRoute,
   KontaktRoute: KontaktRoute,
-  KontoRoute: KontoRoute,
+  KontoRoute: KontoRouteWithChildren,
   LogowanieRoute: LogowanieRoute,
   OfertaRoute: OfertaRoute,
   PlatnoscRoute: PlatnoscRoute,

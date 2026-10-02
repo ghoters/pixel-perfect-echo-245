@@ -23,6 +23,11 @@ export const Route = createFileRoute("/konto")({
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ] }),
+  validateSearch: (search: Record<string, unknown>): { view?: View } => {
+    const view = search["view"];
+    if (view === "orders" || view === "profile" || view === "addresses" || view === "payments" || view === "dashboard") return { view };
+    return {};
+  },
   component: AccountPage,
 });
 
@@ -40,7 +45,8 @@ function Toggle({ on, onClick, label }: { on: boolean; onClick: () => void; labe
 }
 
 function AccountPage() {
-  const [view, setView] = useState<View>("dashboard");
+  const initialView = Route.useSearch().view;
+  const [view, setView] = useState<View>(initialView ?? "dashboard");
   const [query, setQuery] = useState("");
   const [noticeOpen, setNoticeOpen] = useState(false);
   const [orders, setOrders] = useState<{ id: string; order_number: string; figurine_price: number; delivery_price: number; delivery_label: string; status: string; created_at: string }[]>([]);

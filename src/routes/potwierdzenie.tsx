@@ -78,7 +78,7 @@ function ConfirmationPage() {
               </ol>
             </section>
             <Button asChild className="confirm-cta">
-              <Link to="/">Przejdź do panelu zamówienia <ArrowRight aria-hidden="true" /></Link>
+              <Link to="/konto" search={{ view: "orders" }}>Przejdź do panelu zamówienia <ArrowRight aria-hidden="true" /></Link>
             </Button>
           </div>
         </div>

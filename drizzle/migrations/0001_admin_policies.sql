@@ -1,0 +1,14 @@
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS email text NOT NULL DEFAULT '';
+UPDATE public.profiles p SET email = coalesce(u.email,'') FROM auth.users u WHERE u.id = p.id;
+CREATE OR REPLACE FUNCTION public.create_account_profile() RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path TO '' AS $$ BEGIN INSERT INTO public.profiles (id, display_name, email) VALUES (NEW.id, left(coalesce(NEW.raw_user_meta_data ->> 'display_name', ''), 100), coalesce(NEW.email,'')); INSERT INTO public.user_roles(user_id, role) VALUES (NEW.id, 'user'); RETURN NEW; END; $$;
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION public.create_account_profile();
+INSERT INTO public.profiles (id, email) SELECT u.id, coalesce(u.email,'') FROM auth.users u WHERE NOT EXISTS (SELECT 1 FROM public.profiles p WHERE p.id=u.id);
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.orders TO authenticated;
+GRANT SELECT, UPDATE ON public.profiles TO authenticated;
+GRANT SELECT ON public.user_roles TO authenticated;
+CREATE POLICY "Admins read orders" ON public.orders FOR SELECT TO authenticated USING (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "Admins insert orders" ON public.orders FOR INSERT TO authenticated WITH CHECK (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "Admins update orders" ON public.orders FOR UPDATE TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "Admins delete orders" ON public.orders FOR DELETE TO authenticated USING (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "Admins read profiles" ON public.profiles FOR SELECT TO authenticated USING (public.has_role(auth.uid(),'admin'));

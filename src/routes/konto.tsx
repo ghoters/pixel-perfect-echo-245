@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   ArrowRight, Bell, Box, Camera, CheckCircle2, ChevronRight, Clock3, CreditCard,
-  Lightbulb, LogOut, MapPin, Package, Paintbrush, Search, ShoppingBag, Truck, UserRound,
+  FileText, Lightbulb, LogOut, Mail, MapPin, MoreVertical, Package, Paintbrush,
+  Pencil, Phone, Plus, Search, ShieldCheck, ShoppingBag, Truck, UserRound,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -34,12 +35,18 @@ const navigation = [
   { id: "payments", label: "Płatności i faktury", icon: CreditCard },
 ] as const;
 
+function Toggle({ on, onClick, label }: { on: boolean; onClick: () => void; label: string }) {
+  return <button type="button" role="switch" aria-checked={on} aria-label={label} onClick={onClick} className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? "bg-primary" : "bg-muted"}`}><span className={`absolute top-0.5 size-4 rounded-full bg-card shadow transition-all ${on ? "left-[18px]" : "left-0.5"}`} /></button>;
+}
+
 function AccountPage() {
   const [view, setView] = useState<View>("dashboard");
   const [query, setQuery] = useState("");
   const [noticeOpen, setNoticeOpen] = useState(false);
   const [orders, setOrders] = useState<{ id: string; order_number: string; figurine_price: number; delivery_price: number; delivery_label: string; status: string; created_at: string }[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [profile, setProfile] = useState<{ display_name: string; email: string } | null>(null);
+  const [settings, setSettings] = useState({ newsletter: true, orderStatus: true, savedAddresses: true });
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (!user) return;
@@ -47,6 +54,8 @@ function AccountPage() {
       setOrders(data ?? []);
       const { data: r } = await supabase.from("user_roles").select("role").eq("user_id", user.id).eq("role", "admin");
       setIsAdmin(!!r?.length);
+      const { data: p } = await supabase.from("profiles").select("display_name, email").eq("id", user.id).maybeSingle();
+      setProfile(p);
     });
   }, []);
   const [typeFilter, setTypeFilter] = useState<"Wszystkie" | "Figurki na zamówienie" | "Modele 3D">("Wszystkie");
@@ -125,7 +134,53 @@ function AccountPage() {
                 ].map(({ icon: Icon, title, text }) => <div key={title} className="flex items-start gap-3 text-left"><span className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-primary"><Icon className="size-5" /></span><span><strong className="block text-[12px] font-bold">{title}</strong><span className="block text-[11px] leading-4 text-muted-foreground">{text}</span></span></div>)}
               </div>
             </div>}
-          </section> : <section className="min-h-[520px] p-5 sm:p-7"><h1 className="text-2xl font-extrabold">{navigation.find(item => item.id === view)?.label}</h1><div className="mt-8 rounded-md border border-border bg-card p-7 text-sm text-muted-foreground">{view === "profile" ? "Dane konta będą dostępne po uruchomieniu logowania." : view === "addresses" ? "Nie dodano jeszcze adresów." : "Nie masz jeszcze płatności ani faktur."}</div></section>}
+          </section> : view === "profile" ? <section className="min-h-[520px] space-y-4 p-4 sm:p-6">
+            <div><h1 className="text-xl font-extrabold sm:text-2xl">Dane konta</h1><p className="mt-1 text-[12px] text-muted-foreground">Zarządzaj swoimi danymi i ustawieniami konta.</p></div>
+            <div className="grid gap-4 lg:grid-cols-2">
+              <div className="rounded-md border border-border bg-card p-5 shadow-sm">
+                <div className="flex items-center justify-between"><h2 className="text-sm font-extrabold">Podstawowe informacje</h2><Button type="button" variant="link" className="h-auto gap-1 p-0 text-[11px]">Edytuj <Pencil className="size-3" /></Button></div>
+                <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start">
+                  <div className="flex flex-col items-center gap-2"><span className="grid size-20 place-items-center rounded-full bg-secondary text-primary"><UserRound className="size-9" /></span><Button type="button" variant="link" className="h-auto gap-1 p-0 text-[11px]"><Camera className="size-3" /> Zmień zdjęcie</Button></div>
+                  <dl className="flex-1 space-y-4 text-[12px]">
+                    <div><dt className="text-[11px] text-muted-foreground">Imię i nazwisko</dt><dd className="font-semibold">{profile?.display_name || "—"}</dd></div>
+                    <div><dt className="text-[11px] text-muted-foreground">Email</dt><dd className="font-semibold">{profile?.email || "—"}</dd></div>
+                    <div><dt className="text-[11px] text-muted-foreground">Numer telefonu</dt><dd className="font-semibold">+48 123 456 789</dd></div>
+                  </dl>
+                </div>
+              </div>
+              <div className="rounded-md border border-border bg-card p-5 shadow-sm">
+                <h2 className="text-sm font-extrabold">Ustawienia konta</h2>
+                <div className="mt-4 space-y-5">
+                  {([
+                    { key: "newsletter", title: "Newsletter", text: "Otrzymuj informacje o nowościach i promocjach." },
+                    { key: "orderStatus", title: "Powiadomienia o statusie zamówień", text: "Bądź na bieżąco z postępem realizacji." },
+                    { key: "savedAddresses", title: "Zapisane adresy", text: "Używaj zapisanych adresów podczas składania zamówień." },
+                  ] as const).map(({ key, title, text }) => <div key={key} className="flex items-center justify-between gap-4"><div><h3 className="text-[12px] font-bold">{title}</h3><p className="text-[11px] text-muted-foreground">{text}</p></div><Toggle on={settings[key]} onClick={() => setSettings(s => ({ ...s, [key]: !s[key] }))} label={title} /></div>)}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 rounded-md border border-border bg-secondary/50 p-4"><span className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-primary"><ShieldCheck className="size-5" /></span><div><h2 className="text-[13px] font-bold">Twoje konto jest bezpieczne</h2><p className="text-[11px] text-muted-foreground">Wszystkie dane są chronione i wykorzystywane wyłącznie do realizacji zamówień.</p></div></div>
+          </section> : view === "addresses" ? <section className="min-h-[520px] space-y-4 p-4 sm:p-6">
+            <div className="flex flex-wrap items-start justify-between gap-3"><div><h1 className="text-xl font-extrabold sm:text-2xl">Adresy</h1><p className="mt-1 text-[12px] text-muted-foreground">Zarządzaj swoimi adresami dostawy i rozliczeniowymi.</p></div><Button type="button" variant="hero" size="sm" className="gap-1 px-4"><Plus className="size-4" /> Dodaj nowy adres</Button></div>
+            <div className="grid gap-4 lg:grid-cols-2">
+              {[
+                { tag: "Adres dostawy", selected: true, name: "Jan Kowalski", street: "ul. Kwiatowa 12", city: "00-123 Warszawa", country: "Polska" },
+                { tag: "Adres rozliczeniowy", selected: false, name: "Jan Kowalski", street: "ul. Słoneczna 8", city: "00-123 Warszawa", country: "Polska" },
+              ].map(a => <div key={a.tag} className="rounded-md border border-border bg-card p-5 shadow-sm">
+                <div className="flex items-center justify-between gap-2"><span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold ${a.selected ? "bg-secondary text-primary" : "bg-accent text-chart-2"}`}>{a.tag}</span><span className="flex items-center gap-1"><Button type="button" variant="link" className="h-auto gap-1 p-0 text-[11px]"><Pencil className="size-3" /> Edytuj</Button><Button type="button" variant="ghost" size="icon" className="size-7" aria-label="Więcej opcji"><MoreVertical className="size-4" /></Button></span></div>
+                <div className="mt-3 flex items-start gap-3"><span className={`mt-0.5 size-3.5 shrink-0 rounded-full border-2 ${a.selected ? "border-primary bg-primary" : "border-border bg-card"}`} /><div className="text-[12px] leading-5"><strong className="block text-[13px]">{a.name}</strong><span className="block">{a.street}</span><span className="block">{a.city}</span><span className="block">{a.country}</span></div></div>
+                <div className="mt-3 space-y-1.5 text-[11px] text-muted-foreground"><span className="flex items-center gap-2"><Phone className="size-3.5" /> +48 123 456 789</span><span className="flex items-center gap-2"><Mail className="size-3.5" /> {profile?.email || "jan.kowalski@example.com"}</span></div>
+              </div>)}
+            </div>
+            <div className="flex flex-wrap items-center gap-3 rounded-md border border-border bg-secondary/50 p-4"><span className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-primary"><MapPin className="size-5" /></span><div className="min-w-0 flex-1"><h2 className="text-[13px] font-bold">Nie widzisz tutaj swojego adresu?</h2><p className="text-[11px] text-muted-foreground">Jeśli chcesz zmienić adres zamówienia, skontaktuj się z naszym zespołem.</p></div><Button asChild variant="outline" size="sm" className="gap-1 px-4"><Link to="/kontakt">Skontaktuj się <ArrowRight className="size-3" /></Link></Button></div>
+          </section> : <section className="min-h-[520px] space-y-4 p-4 sm:p-6">
+            <div><h1 className="text-xl font-extrabold sm:text-2xl">Płatności i faktury</h1><p className="mt-1 text-[12px] text-muted-foreground">Tutaj znajdziesz historię płatności oraz wystawione faktury.</p></div>
+            <div className="flex flex-col items-center rounded-md border border-border bg-card px-5 py-16 text-center">
+              <span className="grid size-24 place-items-center rounded-full bg-secondary/70 text-primary"><FileText className="size-10" /></span>
+              <h2 className="mt-4 text-lg font-extrabold">Brak faktur</h2>
+              <p className="mt-2 max-w-sm text-[12px] leading-5 text-muted-foreground">Na razie nie masz żadnych wystawionych faktur.<br />Po zrealizowaniu zamówień, faktury będą dostępne w tym miejscu.</p>
+            </div>
+          </section>}
         </div>
       </div>
     </main>

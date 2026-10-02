@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight, Box, ChevronDown, Download, Eye, EyeOff, Headphones, Image as ImageIcon,
   Lock, Mail, ShieldCheck, User,
@@ -47,12 +47,21 @@ const inputWrap = "flex h-12 items-center gap-3 rounded-lg border border-border 
 function LoginPage() {
   const [mode, setMode] = useState<"login" | "register">("login");
   const [show, setShow] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [busy, setBusy] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem("prezent3d:remembered-email");
+      if (saved) { setEmail(saved); setRemember(true); }
+    } catch { /* brak dostępu do localStorage */ }
+  }, []);
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setMsg(null);
@@ -62,6 +71,10 @@ function LoginPage() {
       const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
       setBusy(false);
       if (error) { setMsg({ ok: false, text: "Nieprawidłowy e-mail lub hasło." }); return; }
+      try {
+        if (remember) window.localStorage.setItem("prezent3d:remembered-email", email.trim());
+        else window.localStorage.removeItem("prezent3d:remembered-email");
+      } catch { /* brak dostępu do localStorage */ }
       navigate({ to: "/konto" });
     } else {
       const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: window.location.origin + "/logowanie", data: { display_name: name.trim().slice(0, 100) } } });
@@ -165,7 +178,11 @@ function LoginPage() {
               </div>
 
               {isLogin && (
-                <div className="mt-4 text-right">
+                <div className="mt-4 flex items-center justify-between gap-4">
+                  <label className="flex cursor-pointer select-none items-center gap-2 text-[13px] text-muted-foreground">
+                    <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="size-4 accent-primary" />
+                    Zapamiętaj mnie
+                  </label>
                   <button type="button" onClick={resetPassword} className="text-[12px] font-semibold text-primary hover:underline">Nie pamiętasz hasła?</button>
                 </div>
               )}

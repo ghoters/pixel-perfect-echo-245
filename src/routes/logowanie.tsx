@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
 import { useState } from "react";
 import {
   ArrowRight, Box, ChevronDown, Download, Eye, EyeOff, Headphones, Image as ImageIcon,
@@ -45,6 +47,39 @@ const inputWrap = "flex h-12 items-center gap-3 rounded-lg border border-border 
 function LoginPage() {
   const [mode, setMode] = useState<"login" | "register">("login");
   const [show, setShow] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+  const navigate = useNavigate();
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setMsg(null);
+    if (!email.trim() || password.length < 6) { setMsg({ ok: false, text: "Podaj e-mail i hasło (min. 6 znaków)." }); return; }
+    setBusy(true);
+    if (mode === "login") {
+      const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      setBusy(false);
+      if (error) { setMsg({ ok: false, text: "Nieprawidłowy e-mail lub hasło." }); return; }
+      navigate({ to: "/konto" });
+    } else {
+      const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: window.location.origin + "/logowanie", data: { display_name: name.trim().slice(0, 100) } } });
+      setBusy(false);
+      if (error) { setMsg({ ok: false, text: error.message }); return; }
+      setMsg({ ok: true, text: "Konto utworzone. Sprawdź skrzynkę e-mail, aby potwierdzić adres." });
+    }
+  }
+  async function resetPassword() {
+    if (!email.trim()) { setMsg({ ok: false, text: "Wpisz najpierw swój e-mail." }); return; }
+    await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: window.location.origin + "/logowanie" });
+    setMsg({ ok: true, text: "Wysłaliśmy link do zmiany hasła." });
+  }
+  async function google() {
+    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/konto" });
+    if (r?.error) setMsg({ ok: false, text: "Logowanie przez Google nie powiodło się." });
+    else if (!r?.redirected) navigate({ to: "/konto" });
+  }
   const isLogin = mode === "login";
 
   return (
@@ -104,26 +139,26 @@ function LoginPage() {
               {isLogin ? "Witaj ponownie! Cieszymy się, że wracasz." : "Dołącz do nas i zarządzaj zamówieniami w jednym miejscu."}
             </p>
 
-            <form className="mt-9" onSubmit={(e) => e.preventDefault()}>
+            <form className="mt-9" onSubmit={submit}>
               {!isLogin && (
                 <>
                   <label htmlFor="name" className="mb-3 block text-[13px] font-semibold text-foreground">Imię i nazwisko</label>
                   <div className={`${inputWrap} mb-6`}>
                     <User className="size-4 text-muted-foreground" />
-                    <input id="name" maxLength={100} placeholder="wprowadź imię i nazwisko" className="w-full bg-transparent text-[14px] outline-none placeholder:text-muted-foreground" />
+                    <input id="name" value={name} onChange={(e) => setName(e.target.value)} maxLength={100} placeholder="wprowadź imię i nazwisko" className="w-full bg-transparent text-[14px] outline-none placeholder:text-muted-foreground" />
                   </div>
                 </>
               )}
               <label htmlFor="email" className="mb-3 block text-[13px] font-semibold text-foreground">Adres e-mail</label>
               <div className={inputWrap}>
                 <Mail className="size-4 text-muted-foreground" />
-                <input id="email" type="email" maxLength={255} placeholder="wprowadź swój e-mail" className="w-full bg-transparent text-[14px] outline-none placeholder:text-muted-foreground" />
+                <input id="email" required value={email} onChange={(e) => setEmail(e.target.value)} type="email" maxLength={255} placeholder="wprowadź swój e-mail" className="w-full bg-transparent text-[14px] outline-none placeholder:text-muted-foreground" />
               </div>
 
               <label htmlFor="password" className="mb-3 mt-6 block text-[13px] font-semibold text-foreground">Hasło</label>
               <div className={inputWrap}>
                 <Lock className="size-4 text-muted-foreground" />
-                <input id="password" type={show ? "text" : "password"} placeholder={isLogin ? "wprowadź swoje hasło" : "utwórz hasło"} className="w-full bg-transparent text-[14px] outline-none placeholder:text-muted-foreground" />
+                <input id="password" required value={password} onChange={(e) => setPassword(e.target.value)} type={show ? "text" : "password"} placeholder={isLogin ? "wprowadź swoje hasło" : "utwórz hasło"} className="w-full bg-transparent text-[14px] outline-none placeholder:text-muted-foreground" />
                 <button type="button" onClick={() => setShow((s) => !s)} aria-label={show ? "Ukryj hasło" : "Pokaż hasło"} className="text-muted-foreground hover:text-foreground">
                   {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                 </button>
@@ -131,11 +166,12 @@ function LoginPage() {
 
               {isLogin && (
                 <div className="mt-4 text-right">
-                  <button type="button" className="text-[12px] font-semibold text-primary hover:underline">Nie pamiętasz hasła?</button>
+                  <button type="button" onClick={resetPassword} className="text-[12px] font-semibold text-primary hover:underline">Nie pamiętasz hasła?</button>
                 </div>
               )}
 
-              <button type="submit" className="mt-6 flex h-12 w-full items-center justify-center gap-3 rounded-lg bg-primary text-[14px] font-semibold text-primary-foreground shadow-[var(--shadow-button)] transition hover:bg-primary-dark">
+              {msg && <p role="status" className={`mt-4 text-[13px] ${msg.ok ? "text-primary" : "text-destructive"}`}>{msg.text}</p>}
+              <button type="submit" disabled={busy} className="mt-6 flex h-12 w-full items-center justify-center gap-3 rounded-lg bg-primary text-[14px] font-semibold text-primary-foreground shadow-[var(--shadow-button)] transition hover:bg-primary-dark">
                 {isLogin ? "Zaloguj się" : "Załóż konto"} <ArrowRight className="size-4" />
               </button>
             </form>
@@ -144,7 +180,7 @@ function LoginPage() {
               <span className="h-px flex-1 bg-border" />lub<span className="h-px flex-1 bg-border" />
             </div>
 
-            <button type="button" className="flex h-12 w-full items-center justify-center gap-4 rounded-lg border border-border bg-background text-[14px] font-semibold text-foreground transition hover:bg-muted">
+            <button type="button" onClick={google} className="flex h-12 w-full items-center justify-center gap-4 rounded-lg border border-border bg-background text-[14px] font-semibold text-foreground transition hover:bg-muted">
               <GoogleIcon /> {isLogin ? "Zaloguj się przez Google" : "Zarejestruj się przez Google"}
             </button>
 

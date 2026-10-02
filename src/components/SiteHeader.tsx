@@ -5,7 +5,7 @@ import logoAsset from "@/assets/logo.png.asset.json";
 
 const navLinkHover = "transition-colors duration-200 hover:text-primary/70 focus-visible:text-primary/70 focus-visible:outline-none";
 
-export function SiteHeader({ active = "", variant = "full" }: { active?: "home" | "offer" | "faq" | "kontakt" | ""; variant?: "full" | "checkout" }) {
+export function SiteHeader({ active = "", variant = "full" }: { active?: "home" | "offer" | "faq" | "kontakt" | "sklep" | ""; variant?: "full" | "checkout" }) {
   if (variant === "checkout") {
     return (
       <header className="sticky top-0 z-50 border-b border-border/60 bg-card">

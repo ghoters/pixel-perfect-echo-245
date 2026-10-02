@@ -6,6 +6,8 @@ import {
 } from "lucide-react";
 import logoAsset from "@/assets/logo.png.asset.json";
 import figurka from "@/assets/login-figurka.png";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const Route = createFileRoute("/logowanie")({
   head: () => ({
@@ -46,7 +48,9 @@ function LoginPage() {
   const isLogin = mode === "login";
 
   return (
-    <main className="min-h-screen bg-background px-4 py-8 sm:px-8 lg:py-14">
+    <div className="flex min-h-screen flex-col bg-background">
+      <SiteHeader />
+      <main className="flex-1 bg-background px-4 py-8 sm:px-8 lg:py-14">
       <div className="mx-auto grid max-w-[1410px] overflow-hidden rounded-2xl border border-border bg-card shadow-[0_20px_60px_-30px_color-mix(in_oklab,var(--primary)_25%,transparent)] lg:grid-cols-[1fr_1fr]">
         {/* Left */}
         <section className="relative flex flex-col overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/10 p-8 sm:p-10">
@@ -158,6 +162,8 @@ function LoginPage() {
         <p className="flex items-center justify-center gap-2 text-[14px] text-foreground"><ShieldCheck className="size-5 text-muted-foreground" /> Bezpieczne logowanie</p>
         <p className="mt-2 text-[12px] text-muted-foreground">Twoje dane są szyfrowane i chronione zgodnie z najwyższymi standardami.</p>
       </div>
-    </main>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

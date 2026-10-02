@@ -145,6 +145,17 @@ function KontaktPage() {
       </section>
       </div>
 
+      <section className="border-t border-border bg-background" aria-label="Pomoc">
+        <div className="section-shell flex items-center justify-center gap-2.5 py-6">
+          <CircleHelp className="size-5 shrink-0 text-primary" />
+          <p className="text-[11px] leading-5 text-foreground">
+            Nie znalazłeś odpowiedzi? Napisz na{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="font-semibold text-primary transition-colors hover:underline">prezent3d@gmail.com</a>
+            {" "}- odpowiadamy w ciągu 24 godzin.
+          </p>
+        </div>
+      </section>
+
       <SiteFooter />
     </main>
   );

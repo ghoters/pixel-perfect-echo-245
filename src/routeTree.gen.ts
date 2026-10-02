@@ -15,6 +15,7 @@ import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as PlatnoscRouteImport } from './routes/platnosc'
 import { Route as PotwierdzenieRouteImport } from './routes/potwierdzenie'
+import { Route as SklepRouteImport } from './routes/sklep'
 import { Route as ZamowienieRouteImport } from './routes/zamowienie'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const PotwierdzenieRoute = PotwierdzenieRouteImport.update({
   path: '/potwierdzenie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SklepRoute = SklepRouteImport.update({
+  id: '/sklep',
+  path: '/sklep',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ZamowienieRoute = ZamowienieRouteImport.update({
   id: '/zamowienie',
   path: '/zamowienie',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
   '/potwierdzenie': typeof PotwierdzenieRoute
+  '/sklep': typeof SklepRoute
   '/zamowienie': typeof ZamowienieRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
   '/potwierdzenie': typeof PotwierdzenieRoute
+  '/sklep': typeof SklepRoute
   '/zamowienie': typeof ZamowienieRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
   '/potwierdzenie': typeof PotwierdzenieRoute
+  '/sklep': typeof SklepRoute
   '/zamowienie': typeof ZamowienieRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/oferta'
     | '/platnosc'
     | '/potwierdzenie'
+    | '/sklep'
     | '/zamowienie'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/oferta'
     | '/platnosc'
     | '/potwierdzenie'
+    | '/sklep'
     | '/zamowienie'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/oferta'
     | '/platnosc'
     | '/potwierdzenie'
+    | '/sklep'
     | '/zamowienie'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   OfertaRoute: typeof OfertaRoute
   PlatnoscRoute: typeof PlatnoscRoute
   PotwierdzenieRoute: typeof PotwierdzenieRoute
+  SklepRoute: typeof SklepRoute
   ZamowienieRoute: typeof ZamowienieRoute
 }
 
@@ -165,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PotwierdzenieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sklep': {
+      id: '/sklep'
+      path: '/sklep'
+      fullPath: '/sklep'
+      preLoaderRoute: typeof SklepRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/zamowienie': {
       id: '/zamowienie'
       path: '/zamowienie'
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   OfertaRoute: OfertaRoute,
   PlatnoscRoute: PlatnoscRoute,
   PotwierdzenieRoute: PotwierdzenieRoute,
+  SklepRoute: SklepRoute,
   ZamowienieRoute: ZamowienieRoute,
 }
 export const routeTree = rootRouteImport

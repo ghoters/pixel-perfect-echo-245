@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep the public frontend structure and browser-state purchase flow aligned with the reference repository, because pixel parity is the primary product requirement.
+- Keep account dashboard presentation in its own TanStack route without simulating authentication; the current login screen has no real session provider.

@@ -39,8 +39,15 @@ function AccountPage() {
   const [query, setQuery] = useState("");
   const [noticeOpen, setNoticeOpen] = useState(false);
   const [orders, setOrders] = useState<{ id: string; order_number: string; figurine_price: number; delivery_price: number; delivery_label: string; status: string; created_at: string }[]>([]);
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    supabase.from("orders").select("*").order("created_at", { ascending: false }).then(({ data }) => setOrders(data ?? []));
+    supabase.auth.getUser().then(async ({ data: { user } }) => {
+      if (!user) return;
+      const { data } = await supabase.from("orders").select("*").eq("user_id", user.id).order("created_at", { ascending: false });
+      setOrders(data ?? []);
+      const { data: r } = await supabase.from("user_roles").select("role").eq("user_id", user.id).eq("role", "admin");
+      setIsAdmin(!!r?.length);
+    });
   }, []);
   const filtered = orders.filter(o => !query || o.order_number.includes(query));
   const countFor = (label: string) => label === "Łączna liczba zamówień" ? orders.length : orders.filter(o => o.status === label).length;
@@ -54,6 +61,7 @@ function AccountPage() {
           <Link to="/" className="mb-5 hidden px-2 lg:block" aria-label="Strona główna"><img src={logoAsset.url} alt="prezent3d.com" className="h-7 w-auto" /></Link>
           <nav className="flex gap-1 overflow-x-auto lg:flex-col" aria-label="Menu konta">
             {navigation.map(({ id, label, icon: Icon }) => <Button key={id} type="button" variant="ghost" onClick={() => setView(id)} aria-current={view === id ? "page" : undefined} className={`h-10 shrink-0 justify-start gap-2 px-2.5 text-[12px] font-semibold lg:w-full ${view === id ? "bg-secondary text-primary hover:bg-secondary" : "text-foreground hover:text-primary"}`}><Icon className="size-4" />{label}</Button>)}
+            {isAdmin && <Button asChild variant="ghost" className="h-10 shrink-0 justify-start gap-2 px-2.5 text-[12px] font-semibold text-primary lg:w-full"><Link to="/admin"><UserRound className="size-4" />Panel admina</Link></Button>}
             <Button type="button" variant="ghost" onClick={() => window.location.assign("/logowanie")} className="h-10 shrink-0 justify-start gap-2 px-2.5 text-[12px] font-semibold text-foreground lg:mt-1 lg:w-full"><LogOut className="size-4" />Wróć do logowania</Button>
           </nav>
         </aside>

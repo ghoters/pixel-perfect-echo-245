@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "2541b3be-03db-4798-bc39-599fdbccf048",
-  "project_id": "1402e2bf-8698-43da-b3d2-4f7676236ca2",
-  "url": "/__l5e/assets-v1/2541b3be-03db-4798-bc39-599fdbccf048/osoba1.jpg",
-  "r2_key": "a/v1/1402e2bf-8698-43da-b3d2-4f7676236ca2/2541b3be-03db-4798-bc39-599fdbccf048/osoba1.jpg",
-  "original_filename": "osoba1.jpg",
-  "size": 315611,
   "content_type": "image/jpeg",
-  "created_at": "2026-10-02T05:09:20Z"
+  "created_at": "2026-10-02T05:09:20Z",
+  "original_filename": "osoba1.jpg",
+  "project_id": "8d010d17-e505-4268-83c3-646b68a7e1cd",
+  "r2_key": "a/v1/8d010d17-e505-4268-83c3-646b68a7e1cd/2541b3be-03db-4798-bc39-599fdbccf048/osoba1.jpg",
+  "size": 315611,
+  "url": "/__l5e/assets-v1/2541b3be-03db-4798-bc39-599fdbccf048/osoba1.jpg",
+  "version": 1
 }

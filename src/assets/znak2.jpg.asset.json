@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "d19d060b-5b1a-4fb5-8485-a733304e55cc",
-  "project_id": "1402e2bf-8698-43da-b3d2-4f7676236ca2",
-  "url": "/__l5e/assets-v1/d19d060b-5b1a-4fb5-8485-a733304e55cc/znak2.jpg",
-  "r2_key": "a/v1/1402e2bf-8698-43da-b3d2-4f7676236ca2/d19d060b-5b1a-4fb5-8485-a733304e55cc/znak2.jpg",
-  "original_filename": "znak2.jpg",
-  "size": 129351,
   "content_type": "image/jpeg",
-  "created_at": "2026-10-02T05:09:47Z"
+  "created_at": "2026-10-02T05:09:47Z",
+  "original_filename": "znak2.jpg",
+  "project_id": "8d010d17-e505-4268-83c3-646b68a7e1cd",
+  "r2_key": "a/v1/8d010d17-e505-4268-83c3-646b68a7e1cd/d19d060b-5b1a-4fb5-8485-a733304e55cc/znak2.jpg",
+  "size": 129351,
+  "url": "/__l5e/assets-v1/d19d060b-5b1a-4fb5-8485-a733304e55cc/znak2.jpg",
+  "version": 1
 }

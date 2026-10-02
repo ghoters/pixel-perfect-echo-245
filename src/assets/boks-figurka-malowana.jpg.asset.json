@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "2f1ec7e4-0f28-4c23-ad23-4c8b0628292c",
-  "project_id": "1402e2bf-8698-43da-b3d2-4f7676236ca2",
-  "url": "/__l5e/assets-v1/2f1ec7e4-0f28-4c23-ad23-4c8b0628292c/boks-figurka-malowana.jpg",
-  "r2_key": "a/v1/1402e2bf-8698-43da-b3d2-4f7676236ca2/2f1ec7e4-0f28-4c23-ad23-4c8b0628292c/boks-figurka-malowana.jpg",
-  "original_filename": "boks-figurka-malowana.jpg",
-  "size": 70709,
   "content_type": "image/jpeg",
-  "created_at": "2026-10-02T05:08:53Z"
+  "created_at": "2026-10-02T05:08:53Z",
+  "original_filename": "boks-figurka-malowana.jpg",
+  "project_id": "8d010d17-e505-4268-83c3-646b68a7e1cd",
+  "r2_key": "a/v1/8d010d17-e505-4268-83c3-646b68a7e1cd/2f1ec7e4-0f28-4c23-ad23-4c8b0628292c/boks-figurka-malowana.jpg",
+  "size": 70709,
+  "url": "/__l5e/assets-v1/2f1ec7e4-0f28-4c23-ad23-4c8b0628292c/boks-figurka-malowana.jpg",
+  "version": 1
 }

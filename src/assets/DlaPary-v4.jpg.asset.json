@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "45682133-b460-426b-96bc-45e17da470a7",
-  "project_id": "1402e2bf-8698-43da-b3d2-4f7676236ca2",
-  "url": "/__l5e/assets-v1/45682133-b460-426b-96bc-45e17da470a7/DlaPary-v4.jpg",
-  "r2_key": "a/v1/1402e2bf-8698-43da-b3d2-4f7676236ca2/45682133-b460-426b-96bc-45e17da470a7/DlaPary-v4.jpg",
-  "original_filename": "DlaPary-v4.jpg",
-  "size": 108732,
   "content_type": "image/jpeg",
-  "created_at": "2026-10-02T05:08:36Z"
+  "created_at": "2026-10-02T05:08:36Z",
+  "original_filename": "DlaPary-v4.jpg",
+  "project_id": "8d010d17-e505-4268-83c3-646b68a7e1cd",
+  "r2_key": "a/v1/8d010d17-e505-4268-83c3-646b68a7e1cd/45682133-b460-426b-96bc-45e17da470a7/DlaPary-v4.jpg",
+  "size": 108732,
+  "url": "/__l5e/assets-v1/45682133-b460-426b-96bc-45e17da470a7/DlaPary-v4.jpg",
+  "version": 1
 }

@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "a32be147-a621-4074-998a-ab3c04f7f077",
-  "project_id": "1402e2bf-8698-43da-b3d2-4f7676236ca2",
-  "url": "/__l5e/assets-v1/a32be147-a621-4074-998a-ab3c04f7f077/gotowa-figurka.jpg",
-  "r2_key": "a/v1/1402e2bf-8698-43da-b3d2-4f7676236ca2/a32be147-a621-4074-998a-ab3c04f7f077/gotowa-figurka.jpg",
-  "original_filename": "gotowa-figurka.jpg",
-  "size": 547693,
   "content_type": "image/jpeg",
-  "created_at": "2026-10-02T05:09:04Z"
+  "created_at": "2026-10-02T05:09:04Z",
+  "original_filename": "gotowa-figurka.jpg",
+  "project_id": "8d010d17-e505-4268-83c3-646b68a7e1cd",
+  "r2_key": "a/v1/8d010d17-e505-4268-83c3-646b68a7e1cd/a32be147-a621-4074-998a-ab3c04f7f077/gotowa-figurka.jpg",
+  "size": 547693,
+  "url": "/__l5e/assets-v1/a32be147-a621-4074-998a-ab3c04f7f077/gotowa-figurka.jpg",
+  "version": 1
 }

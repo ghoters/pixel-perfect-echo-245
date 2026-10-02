@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "ab3bddf9-d2d3-4df8-ab3b-dcd02b2ec2d8",
-  "project_id": "1402e2bf-8698-43da-b3d2-4f7676236ca2",
-  "url": "/__l5e/assets-v1/ab3bddf9-d2d3-4df8-ab3b-dcd02b2ec2d8/podglad-figurki.jpg",
-  "r2_key": "a/v1/1402e2bf-8698-43da-b3d2-4f7676236ca2/ab3bddf9-d2d3-4df8-ab3b-dcd02b2ec2d8/podglad-figurki.jpg",
-  "original_filename": "podglad-figurki.jpg",
-  "size": 1031985,
   "content_type": "image/jpeg",
-  "created_at": "2026-10-02T05:09:25Z"
+  "created_at": "2026-10-02T05:09:25Z",
+  "original_filename": "podglad-figurki.jpg",
+  "project_id": "8d010d17-e505-4268-83c3-646b68a7e1cd",
+  "r2_key": "a/v1/8d010d17-e505-4268-83c3-646b68a7e1cd/ab3bddf9-d2d3-4df8-ab3b-dcd02b2ec2d8/podglad-figurki.jpg",
+  "size": 1031985,
+  "url": "/__l5e/assets-v1/ab3bddf9-d2d3-4df8-ab3b-dcd02b2ec2d8/podglad-figurki.jpg",
+  "version": 1
 }

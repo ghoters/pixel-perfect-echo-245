@@ -109,7 +109,7 @@ function Index() {
           <div className="flex min-w-0 flex-col justify-center py-10 sm:py-12 lg:py-14 lg:pr-16">
             <p className="text-xs font-extrabold uppercase text-primary">Personalizowane figurki 3D</p>
             <h1 className="mt-3 max-w-[640px] text-[36px] font-extrabold leading-[1.08] sm:text-[44px] lg:text-[52px]">Stwórz personalizowaną <span className="text-primary">figurkę 3D</span> ze zdjęcia.</h1>
-            <p className="mt-5 max-w-[560px] text-[15px] leading-7 text-muted-foreground">Zamień swoje zdjęcie w wyjątkową figurkę 3D. Wybierz rozmiar, liczbę postaci&nbsp; i sposób wykończenia, a my przygotujemy ją na podstawie Twoich zdjęć.</p>
+            <p className="mt-5 max-w-[560px] text-[15px] leading-7 text-muted-foreground">Zamień swoje zdjęcie w wyjątkową figurkę 3D. Wybierz rozmiar, liczbę postaci&nbsp;&nbsp;i sposób wykończenia, a my przygotujemy ją na podstawie Twoich zdjęć.</p>
             <Button variant="hero" size="hero" className="mt-6 w-fit" asChild><Link to="/oferta">Stwórz swoją figurkę <ArrowRight /></Link></Button>
           </div>
         </div>

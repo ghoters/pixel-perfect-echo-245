@@ -47,6 +47,7 @@ const inputWrap = "flex h-12 items-center gap-3 rounded-lg border border-border 
 function LoginPage() {
   const [mode, setMode] = useState<"login" | "register">("login");
   const [show, setShow] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

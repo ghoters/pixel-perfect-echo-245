@@ -52,7 +52,7 @@ function SklepPage() {
             to="/kontakt"
             className="mt-2 block max-w-[420px] text-[12px] leading-5 text-muted-foreground transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none"
           >
-            <span className="underline-offset-4 hover:underline">
+            <span className="glow-breathe underline-offset-4 hover:underline">
               Napisz do nas – chętnie przygotujemy indywidualny projekt.
             </span>
           </Link>

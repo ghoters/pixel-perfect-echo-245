@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as LogowanieRouteImport } from './routes/logowanie'
 import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as PlatnoscRouteImport } from './routes/platnosc'
 import { Route as PotwierdzenieRouteImport } from './routes/potwierdzenie'
@@ -31,6 +32,11 @@ const FaqRoute = FaqRouteImport.update({
 const KontaktRoute = KontaktRouteImport.update({
   id: '/kontakt',
   path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogowanieRoute = LogowanieRouteImport.update({
+  id: '/logowanie',
+  path: '/logowanie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OfertaRoute = OfertaRouteImport.update({
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/faq': typeof FaqRoute
   '/kontakt': typeof KontaktRoute
+  '/logowanie': typeof LogowanieRoute
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
   '/potwierdzenie': typeof PotwierdzenieRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/faq': typeof FaqRoute
   '/kontakt': typeof KontaktRoute
+  '/logowanie': typeof LogowanieRoute
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
   '/potwierdzenie': typeof PotwierdzenieRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/faq': typeof FaqRoute
   '/kontakt': typeof KontaktRoute
+  '/logowanie': typeof LogowanieRoute
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
   '/potwierdzenie': typeof PotwierdzenieRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/faq'
     | '/kontakt'
+    | '/logowanie'
     | '/oferta'
     | '/platnosc'
     | '/potwierdzenie'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/faq'
     | '/kontakt'
+    | '/logowanie'
     | '/oferta'
     | '/platnosc'
     | '/potwierdzenie'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/faq'
     | '/kontakt'
+    | '/logowanie'
     | '/oferta'
     | '/platnosc'
     | '/potwierdzenie'
@@ -127,6 +139,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FaqRoute: typeof FaqRoute
   KontaktRoute: typeof KontaktRoute
+  LogowanieRoute: typeof LogowanieRoute
   OfertaRoute: typeof OfertaRoute
   PlatnoscRoute: typeof PlatnoscRoute
   PotwierdzenieRoute: typeof PotwierdzenieRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/kontakt'
       fullPath: '/kontakt'
       preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logowanie': {
+      id: '/logowanie'
+      path: '/logowanie'
+      fullPath: '/logowanie'
+      preLoaderRoute: typeof LogowanieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/oferta': {
@@ -199,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FaqRoute: FaqRoute,
   KontaktRoute: KontaktRoute,
+  LogowanieRoute: LogowanieRoute,
   OfertaRoute: OfertaRoute,
   PlatnoscRoute: PlatnoscRoute,
   PotwierdzenieRoute: PotwierdzenieRoute,

@@ -85,7 +85,7 @@ function KontaktPage() {
           <section className="rounded-lg border border-border bg-card px-6 py-6 sm:px-7" aria-labelledby="contact-details-title">
             <p className="text-[11px] font-extrabold uppercase text-primary">Skontaktuj się z nami</p>
             <h2 id="contact-details-title" className="mt-1 text-2xl font-extrabold leading-tight text-foreground md:text-[28px]">Dane kontaktowe</h2>
-            <p className="mt-3 text-xs leading-5 text-muted-foreground">Jesteśmy dostępni od poniedziałku do piątku w godzinach 9:00–17:00. Odpowiadamy na wszystkie wiadomości w ciągu 24 godzin.</p>
+            <p className="mt-3 text-xs leading-5 text-muted-foreground">Jesteśmy dostępni od poniedziałku <br />do piątku w godzinach 9:00–17:00. Odpowiadamy na wszystkie wiadomości <br />w ciągu 24 godzin.</p>
             <div className="mt-7 space-y-6">
               {contactDetails.map((item) => {
                 const content = (

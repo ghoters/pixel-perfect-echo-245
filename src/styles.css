@@ -470,13 +470,13 @@
 @keyframes glow-breathe {
   from {
     text-shadow:
-      0 0 4px color-mix(in oklab, var(--primary) 18%, transparent),
-      0 0 10px color-mix(in oklab, var(--primary) 8%, transparent);
+      0 0 4px color-mix(in oklab, var(--primary) 45%, transparent),
+      0 0 10px color-mix(in oklab, var(--primary) 26%, transparent);
   }
   to {
     text-shadow:
-      0 0 6px color-mix(in oklab, var(--primary) 38%, transparent),
-      0 0 16px color-mix(in oklab, var(--primary) 22%, transparent);
+      0 0 6px color-mix(in oklab, var(--primary) 72%, transparent),
+      0 0 16px color-mix(in oklab, var(--primary) 48%, transparent);
   }
 }
 .glow-breathe {

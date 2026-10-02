@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as KontoRouteImport } from './routes/konto'
 import { Route as LogowanieRouteImport } from './routes/logowanie'
 import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as PlatnoscRouteImport } from './routes/platnosc'
@@ -32,6 +33,11 @@ const FaqRoute = FaqRouteImport.update({
 const KontaktRoute = KontaktRouteImport.update({
   id: '/kontakt',
   path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontoRoute = KontoRouteImport.update({
+  id: '/konto',
+  path: '/konto',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LogowanieRoute = LogowanieRouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/faq': typeof FaqRoute
   '/kontakt': typeof KontaktRoute
+  '/konto': typeof KontoRoute
   '/logowanie': typeof LogowanieRoute
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/faq': typeof FaqRoute
   '/kontakt': typeof KontaktRoute
+  '/konto': typeof KontoRoute
   '/logowanie': typeof LogowanieRoute
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/faq': typeof FaqRoute
   '/kontakt': typeof KontaktRoute
+  '/konto': typeof KontoRoute
   '/logowanie': typeof LogowanieRoute
   '/oferta': typeof OfertaRoute
   '/platnosc': typeof PlatnoscRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/faq'
     | '/kontakt'
+    | '/konto'
     | '/logowanie'
     | '/oferta'
     | '/platnosc'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/'
     | '/faq'
     | '/kontakt'
+    | '/konto'
     | '/logowanie'
     | '/oferta'
     | '/platnosc'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/'
     | '/faq'
     | '/kontakt'
+    | '/konto'
     | '/logowanie'
     | '/oferta'
     | '/platnosc'
@@ -139,6 +151,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FaqRoute: typeof FaqRoute
   KontaktRoute: typeof KontaktRoute
+  KontoRoute: typeof KontoRoute
   LogowanieRoute: typeof LogowanieRoute
   OfertaRoute: typeof OfertaRoute
   PlatnoscRoute: typeof PlatnoscRoute
@@ -168,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/kontakt'
       fullPath: '/kontakt'
       preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/konto': {
+      id: '/konto'
+      path: '/konto'
+      fullPath: '/konto'
+      preLoaderRoute: typeof KontoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/logowanie': {
@@ -219,6 +239,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FaqRoute: FaqRoute,
   KontaktRoute: KontaktRoute,
+  KontoRoute: KontoRoute,
   LogowanieRoute: LogowanieRoute,
   OfertaRoute: OfertaRoute,
   PlatnoscRoute: PlatnoscRoute,

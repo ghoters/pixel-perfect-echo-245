@@ -2,8 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
-  ArrowRight, Bell, Box, CheckCircle2, ChevronRight, Clock3, CreditCard,
-  Lightbulb, LogOut, MapPin, Package, Search, ShoppingBag, Truck, UserRound,
+  ArrowRight, Bell, Box, Camera, CheckCircle2, ChevronRight, Clock3, CreditCard,
+  Lightbulb, LogOut, MapPin, Package, Paintbrush, Search, ShoppingBag, Truck, UserRound,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -49,7 +49,10 @@ function AccountPage() {
       setIsAdmin(!!r?.length);
     });
   }, []);
-  const filtered = orders.filter(o => !query || o.order_number.includes(query));
+  const [typeFilter, setTypeFilter] = useState<"Wszystkie" | "Figurki na zamówienie" | "Modele 3D">("Wszystkie");
+  const [statusFilter, setStatusFilter] = useState<"Wszystkie" | "W realizacji" | "Wymaga działania" | "Zakończone">("Wszystkie");
+  const statusMap: Record<string, string[]> = { "W realizacji": ["W realizacji"], "Wymaga działania": ["Wymaga działania"], "Zakończone": ["Gotowe do pobrania", "Wysłane", "Zakończone"] };
+  const filtered = orders.filter(o => (!query || o.order_number.includes(query)) && (statusFilter === "Wszystkie" || statusMap[statusFilter]?.includes(o.status)));
   const countFor = (label: string) => label === "Łączna liczba zamówień" ? orders.length : orders.filter(o => o.status === label).length;
   const orderList = (list: typeof orders) => <ul className="mt-3 w-full divide-y divide-border text-left">{list.map(o => <li key={o.id} className="flex items-center justify-between gap-3 py-3"><span><strong className="block text-[13px]">Zamówienie {o.order_number}</strong><span className="text-[11px] text-muted-foreground">{new Date(o.created_at).toLocaleDateString("pl-PL")} · {o.delivery_label}</span></span><span className="text-right"><strong className="block text-[13px]">{(Number(o.figurine_price) + Number(o.delivery_price)).toFixed(2).replace(".", ",")} zł</strong><span className="text-[11px] text-primary">{o.status}</span></span></li>)}</ul>;
 

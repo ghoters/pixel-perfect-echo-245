@@ -45,11 +45,11 @@ function SklepPage() {
           </Button>
 
           <div className="mt-8 border-t border-border/60 pt-6">
-            <p className="flex items-center justify-center gap-2 text-[12px] font-semibold text-foreground">
+            <p className="flex items-center justify-center gap-2 text-[13px] font-semibold text-foreground">
               <Lightbulb className="size-4 text-primary" aria-hidden="true" />
               Masz pomysł na inny model?
             </p>
-            <p className="mt-2 max-w-[400px] text-[11px] leading-5 text-muted-foreground">
+            <p className="mt-2 max-w-[420px] text-[12px] leading-5 text-muted-foreground">
               Napisz do nas – chętnie przygotujemy indywidualny projekt.
             </p>
           </div>

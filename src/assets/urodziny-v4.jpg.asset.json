@@ -1,11 +1,11 @@
 {
-  "asset_id": "13a6a966-704b-408d-941e-0aa67196e8b7",
-  "content_type": "image/jpeg",
-  "created_at": "2026-10-01T23:37:25Z",
+  "version": 1,
+  "asset_id": "f6d19b59-33e4-4e1d-b5e4-3cb5fbb2ac0c",
+  "project_id": "1402e2bf-8698-43da-b3d2-4f7676236ca2",
+  "url": "/__l5e/assets-v1/f6d19b59-33e4-4e1d-b5e4-3cb5fbb2ac0c/urodziny-v4.jpg",
+  "r2_key": "a/v1/1402e2bf-8698-43da-b3d2-4f7676236ca2/f6d19b59-33e4-4e1d-b5e4-3cb5fbb2ac0c/urodziny-v4.jpg",
   "original_filename": "urodziny-v4.jpg",
-  "project_id": "5c4b48b9-22cf-454e-bb31-d8dfd81129e9",
-  "r2_key": "a/v1/5c4b48b9-22cf-454e-bb31-d8dfd81129e9/13a6a966-704b-408d-941e-0aa67196e8b7/urodziny-v4.jpg",
   "size": 101194,
-  "url": "/__l5e/assets-v1/13a6a966-704b-408d-941e-0aa67196e8b7/urodziny-v4.jpg",
-  "version": 1
+  "content_type": "image/jpeg",
+  "created_at": "2026-10-02T05:09:43Z"
 }

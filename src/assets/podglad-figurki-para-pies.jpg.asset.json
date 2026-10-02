@@ -1,11 +1,11 @@
 {
-  "asset_id": "d9960fe9-7809-4714-bfa2-8183a56c22a6",
-  "content_type": "image/jpeg",
-  "created_at": "2026-10-01T23:36:58Z",
+  "version": 1,
+  "asset_id": "31f73de9-0fd5-4392-aa61-89dcb732d0e3",
+  "project_id": "1402e2bf-8698-43da-b3d2-4f7676236ca2",
+  "url": "/__l5e/assets-v1/31f73de9-0fd5-4392-aa61-89dcb732d0e3/podglad-figurki-para-pies.jpg",
+  "r2_key": "a/v1/1402e2bf-8698-43da-b3d2-4f7676236ca2/31f73de9-0fd5-4392-aa61-89dcb732d0e3/podglad-figurki-para-pies.jpg",
   "original_filename": "podglad-figurki-para-pies.jpg",
-  "project_id": "5c4b48b9-22cf-454e-bb31-d8dfd81129e9",
-  "r2_key": "a/v1/5c4b48b9-22cf-454e-bb31-d8dfd81129e9/d9960fe9-7809-4714-bfa2-8183a56c22a6/podglad-figurki-para-pies.jpg",
   "size": 484830,
-  "url": "/__l5e/assets-v1/d9960fe9-7809-4714-bfa2-8183a56c22a6/podglad-figurki-para-pies.jpg",
-  "version": 1
+  "content_type": "image/jpeg",
+  "created_at": "2026-10-02T05:09:24Z"
 }
